@@ -1,0 +1,17 @@
+This module contains some common stuff needed by the other modules.
+
+I hope to keep this as small as possible so the bits implemented here can be 
+merged back into the modules if they need to be used independently, making the 
+other modules very close to being self-contained.
+
+This software was written in 2010 by Cristian Măgherușan-Stanciu, as part of the MSc. thesis 
+project at the Technical University of Cluj-Napoca, Romania.
+
+I hereby place all of it under the public domain, so feel free to use it for any purpose.
+
+Still, I'd appreciate if you would give me any feedback, and patches are always welcome.
+
+Thanks for using it, and I hope you enjoy it as much as I enjoyed writing it.
+
+Cristian Măgherușan-Stanciu,
+April 2010
