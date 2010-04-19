@@ -1,5 +1,5 @@
 #XXX: Most of this stuff is already done in kickstart, maybe we should skip it here
-class common_base{
+class glider_common{
 	package {["ntp", "puppet", "openssh-server"]:
 		ensure => installed
 	}
@@ -14,7 +14,7 @@ class common_base{
 	}
     
     file{"/etc/puppet/puppet.conf":
-        content => template("common-base/puppet.conf.erb"),
+        content => template("glider-common/puppet.conf.erb"),
         notify  => Service["puppet"]
     }
 
