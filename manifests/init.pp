@@ -17,7 +17,13 @@ class glider_common{
         content => template("glider-common/puppet.conf.erb"),
         notify  => Service["puppet"]
     }
-
+    
+    augeas{ "make_hosts_entry" :
+        context => "/files/etc/hosts/1",
+        changes => ["set alias[last()+1] $fqdn",
+                    "set alias[last()+1] $hostname"],
+        onlyif  => "get alias[last()] == localhost"
+    }
 }
 define download_file(
 		$site="",
