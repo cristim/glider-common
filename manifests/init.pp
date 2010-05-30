@@ -1,12 +1,21 @@
-#XXX: Most of this stuff is already done in kickstart, maybe we should skip it here
+# Most of this stuff is already done in kickstart, just making sure it's still there
 class glider_common{
 	package {["ntp", "puppet", "openssh-server"]:
 		ensure => installed
 	}
-	service {["ntpd", "puppet", "sshd"]:
+	service {["puppet", "sshd"]:
 		ensure => running,
 		enable => true
 	}
+	
+	# NTP is useless in OpenVZ
+	if $isvirtual {	
+		service {["ntpd"]:
+			ensure => stopped,
+			enable => false,
+		}
+	}
+	
 	package { "epel-release":
 		provider => "rpm",
 		source => "http://download.fedora.redhat.com/pub/epel/5/i386/epel-release-5-3.noarch.rpm",
@@ -18,11 +27,12 @@ class glider_common{
         notify  => Service["puppet"]
     }
     
-    augeas{ "make_hosts_entry" :
+    augeas{ "fix_etc_hosts" :
         context => "/files/etc/hosts/1",
-        changes => ["set alias[last()+1] $fqdn",
-                    "set alias[last()+1] $hostname"],
-        onlyif  => "get alias[last()] == localhost"
+        changes => ["set canonical $fqdn",
+                    "set alias[1] $hostname",
+                    "set alias[2] localhost"],
+        onlyif  => "get canonical != $fqdn"
     }
 }
 define download_file(
@@ -48,3 +58,19 @@ define download_file(
 
 }
 
+define nfs_server($shares,
+		$hosts 	= "*",
+		$options= "rw,no_root_squash"){
+	package { ["nfs-utils","portmap"]:
+        	ensure => present,
+	}	
+	file{"/etc/exports":
+		content => template("glider-common/exports.erb"),
+		notify  => Service["portmap", "nfs"],
+		require => Package["nfs-utils","portmap"],
+	}
+	service {["portmap", "nfs"]:
+		ensure => running,
+		require => File["/etc/exports"],
+	}
+}

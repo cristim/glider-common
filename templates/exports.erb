@@ -1,0 +1,8 @@
+<%
+s = [shares].flatten
+h = [hosts].flatten
+o = [options].flatten
+
+s.each_with_index do |share, i| %>
+<%= s[i] -%> <%= h[i] -%>(<%= o[i] -%>)
+<% end -%>
