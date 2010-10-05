@@ -1,0 +1,100 @@
+# This file is generated using puppet, your modifications are in vain!
+
+127.0.0.1	localhost
+
+217.73.173.23 	puppet
+
+<% if hostname == "ce01" || hostname == "se01" || hostname == "apel01" || hostname == "lfc01" || hostname == "ui01"%>        
+
+#LFC
+217.73.173.24   lfc01.mosigrid.utcluj.ro	lfc01
+#SE01
+217.73.173.22   se01.mosigrid.utcluj.ro		se01
+#CE01
+217.73.173.21   ce01.mosigrid.utcluj.ro		ce01
+#APEL01
+217.73.173.26	apel01.mosigrid.utcluj.ro	apel01
+#UI01
+217.73.173.20	ui01.mosigrid.utcluj.ro		ui01
+
+<% else %>
+
+<%= ipaddress %>	<%= fqdn %>
+
+#test
+#LFC
+192.168.1.103   lfc01.mosigrid.utcluj.ro
+#SE01
+192.168.1.252   se01.mosigrid.utcluj.ro
+#CE01
+192.168.1.253   ce01.mosigrid.utcluj.ro
+
+<% end %>
+
+# Workers
+
+192.168.1.1	wn01.mosigrid.utcluj.ro	wn01
+192.168.1.2	wn02.mosigrid.utcluj.ro	wn02
+192.168.1.3	wn03.mosigrid.utcluj.ro	wn03
+192.168.1.4	wn04.mosigrid.utcluj.ro	wn04
+192.168.1.5	wn05.mosigrid.utcluj.ro	wn05
+192.168.1.6	wn06.mosigrid.utcluj.ro	wn06
+192.168.1.7	wn07.mosigrid.utcluj.ro	wn07
+192.168.1.8	wn08.mosigrid.utcluj.ro	wn08
+192.168.1.9	wn09.mosigrid.utcluj.ro	wn09
+192.168.1.10	wn10.mosigrid.utcluj.ro	wn10
+192.168.1.11	wn11.mosigrid.utcluj.ro	wn11
+192.168.1.12	wn12.mosigrid.utcluj.ro	wn12
+192.168.1.13	wn13.mosigrid.utcluj.ro	wn13
+192.168.1.14	wn14.mosigrid.utcluj.ro	wn14
+192.168.1.15	wn15.mosigrid.utcluj.ro	wn15
+192.168.1.16	wn16.mosigrid.utcluj.ro	wn16
+192.168.1.17	wn17.mosigrid.utcluj.ro	wn17
+192.168.1.18	wn18.mosigrid.utcluj.ro	wn18
+192.168.1.19	wn19.mosigrid.utcluj.ro	wn19
+192.168.1.20	wn20.mosigrid.utcluj.ro	wn20
+192.168.1.21	wn21.mosigrid.utcluj.ro	wn21
+192.168.1.22	wn22.mosigrid.utcluj.ro	wn22
+192.168.1.23	wn23.mosigrid.utcluj.ro	wn23
+192.168.1.24	wn24.mosigrid.utcluj.ro	wn24
+192.168.1.25	wn25.mosigrid.utcluj.ro	wn25
+192.168.1.26	wn26.mosigrid.utcluj.ro	wn26
+192.168.1.27	wn27.mosigrid.utcluj.ro	wn27
+192.168.1.28	wn28.mosigrid.utcluj.ro	wn28
+192.168.1.29	wn29.mosigrid.utcluj.ro	wn29
+192.168.1.30	wn30.mosigrid.utcluj.ro	wn30
+192.168.1.31	wn31.mosigrid.utcluj.ro	wn31
+192.168.1.32	wn32.mosigrid.utcluj.ro	wn32
+192.168.1.33	wn33.mosigrid.utcluj.ro	wn33
+192.168.1.34	wn34.mosigrid.utcluj.ro	wn34
+192.168.1.35	wn35.mosigrid.utcluj.ro	wn35
+192.168.1.36	wn36.mosigrid.utcluj.ro	wn36
+192.168.1.37	wn37.mosigrid.utcluj.ro	wn37
+192.168.1.38	wn38.mosigrid.utcluj.ro	wn38
+192.168.1.39	wn39.mosigrid.utcluj.ro	wn39
+192.168.1.40	wn40.mosigrid.utcluj.ro	wn40
+192.168.1.41	wn41.mosigrid.utcluj.ro	wn41
+192.168.1.42	wn42.mosigrid.utcluj.ro	wn42
+192.168.1.43	wn43.mosigrid.utcluj.ro	wn43
+192.168.1.44	wn44.mosigrid.utcluj.ro	wn44
+192.168.1.45	wn45.mosigrid.utcluj.ro	wn45
+192.168.1.46	wn46.mosigrid.utcluj.ro	wn46
+192.168.1.47	wn47.mosigrid.utcluj.ro	wn47
+192.168.1.48	wn48.mosigrid.utcluj.ro	wn48
+192.168.1.49	wn49.mosigrid.utcluj.ro	wn49
+192.168.1.50	wn50.mosigrid.utcluj.ro	wn50
+192.168.1.51	wn51.mosigrid.utcluj.ro	wn51
+192.168.1.52	wn52.mosigrid.utcluj.ro	wn52
+192.168.1.53	wn53.mosigrid.utcluj.ro	wn53
+192.168.1.54	wn54.mosigrid.utcluj.ro	wn54
+192.168.1.55	wn55.mosigrid.utcluj.ro	wn55
+192.168.1.56	wn56.mosigrid.utcluj.ro	wn56
+192.168.1.57	wn57.mosigrid.utcluj.ro	wn57
+192.168.1.58	wn58.mosigrid.utcluj.ro	wn58
+192.168.1.59	wn59.mosigrid.utcluj.ro	wn59
+192.168.1.60	wn60.mosigrid.utcluj.ro	wn60
+192.168.1.61	wn61.mosigrid.utcluj.ro	wn61
+192.168.1.62	wn62.mosigrid.utcluj.ro	wn62
+192.168.1.63	wn63.mosigrid.utcluj.ro	wn63
+192.168.1.64	wn64.mosigrid.utcluj.ro	wn64
+

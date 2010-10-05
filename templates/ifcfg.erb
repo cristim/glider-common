@@ -1,0 +1,20 @@
+DEVICE=<%= device %>
+<% if ip != "" -%>
+IPADDR=<%= ip %>
+NETMASK=<%= netmask %>
+<% if gateway != "" -%>
+GATEWAY=<%= gateway %>
+<% end 
+end -%>
+<% if onboot != "" -%>
+ONBOOT=<%= onboot %>
+<% end -%>
+BOOTPROTO=<%= bproto %>
+<% if bridge != "" -%>
+BRIDGE=<%= bridge %>
+<% end -%>
+<% if iftype != "" -%>
+TYPE=<%= iftype %>
+DELAY=0
+<% end -%>
+

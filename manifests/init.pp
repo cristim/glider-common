@@ -1,11 +1,12 @@
 # Most of this stuff is already done in kickstart, just making sure it's still there
 class glider_common{
-	package {["ntp", "puppet", "openssh-server"]:
+	package {["ntp", "puppet", "openssh-server", "bridge-utils"]:
 		ensure => installed
 	}
-	service {["puppet", "sshd"]:
+	service {["puppet", "sshd", "network"]:
 		ensure => running,
-		enable => true
+		enable => true,
+		hasstatus => true,
 	}
 	
 	# NTP is useless in OpenVZ
@@ -18,7 +19,7 @@ class glider_common{
 	
 	package { "epel-release":
 		provider => "rpm",
-		source => "http://download.fedora.redhat.com/pub/epel/5/i386/epel-release-5-3.noarch.rpm",
+		source => "http://download.fedora.redhat.com/pub/epel/5/i386/epel-release-5-4.noarch.rpm",
 		ensure => installed;
 	}
     
@@ -26,15 +27,25 @@ class glider_common{
         content => template("glider-common/puppet.conf.erb"),
         notify  => Service["puppet"]
     }
-    
-    augeas{ "fix_etc_hosts" :
-        context => "/files/etc/hosts/1",
-        changes => ["set canonical $fqdn",
-                    "set alias[1] $hostname",
-                    "set alias[2] localhost"],
-        onlyif  => "get canonical != $fqdn"
+    	
+}
+
+define etc_hosts(){
+    file{"/etc/hosts":
+	content => template("glider-common/hosts.erb")
     }
 }
+
+}
+
+
+define ntp_conf(){
+    file{"/etc/ntp.conf":
+        content => template("glider-common/ntp.conf.erb")
+    }
+}
+
+
 define download_file(
 		$site="",
 		$local_path="", 
@@ -72,5 +83,45 @@ define nfs_server($shares,
 	service {["portmap", "nfs"]:
 		ensure => running,
 		require => File["/etc/exports"],
+	}
+}
+
+define iscsi_client($host, $username, $password){
+	package{"iscsi-initiator-utils":
+		ensure => installed
+	}
+	file{"/etc/iscsid.conf":
+		content => template("glider-common/iscsid.conf.erb"),
+		notify =>  Service["iscsi"],
+	}
+	service{"iscsi":
+		ensure => running,
+		enable => true,
+		require => [Package["iscsi-initiator-utils"], File["/etc/iscsid.conf"]],
+	}
+	
+}
+
+define ifcfg($ip="", $netmask="", $gateway="",
+		$iftype="", $bridge="", $vlan="", $onboot="yes", $master="", bootproto="")
+	{
+	$device = $name
+
+	if $master { 
+		$slave="yes" 
+	}
+	if !$bootproto {
+		if $ip { $bproto="static" }
+		else { $bproto="none" }
+	}
+	if $bootproto == "dhcp" { $bproto="dhcp"}
+
+	if $iftype == "bridge"{
+		$delay="0"
+}
+	
+	file{"/etc/sysconfig/network-scripts/ifcfg-$device":
+		content => template("glider-common/ifcfg.erb"),
+		notify =>  Service["network"],
 	}
 }
